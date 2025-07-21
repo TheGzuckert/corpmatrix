@@ -61,6 +61,6 @@ class UserForm extends Component
 
     public function render()
     {
-        return view('livewire.user-form')->layout('components.layouts.app');
+        return view('livewire.user-form')->layout('components.layouts.guest');
     }
 }

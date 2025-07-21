@@ -4,45 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Usuários</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     @livewireStyles
 </head>
 <body class="bg-gray-100">
     @auth
-        <nav class="bg-white shadow-lg">
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="flex justify-between">
-                    <div class="flex space-x-7">
-                        <div>
-                            <a href="{{ route('dashboard') }}" class="flex items-center py-4 px-2">
-                                <span class="font-semibold text-gray-500 text-lg">Sistema de Usuários</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="py-2 px-4 text-gray-500 hover:text-gray-700">
-                                Sair
-                            </button>
-                        </form>
-                    </div>
-                </div>
+        <!-- Navbar Superior -->
+        <nav class="bg-purple-900 shadow-lg fixed top-0 left-0 right-0 z-50 h-12">
+            <div class="h-full px-4 flex justify-between items-center">
+                <span class="font-semibold text-white text-lg">CorpMatrix</span>
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center">
+                    @csrf
+                    <button type="submit" class="text-white hover:text-purple-200 transition duration-300 flex items-center">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Sair
+                    </button>
+                </form>
             </div>
         </nav>
+
+        <div class="flex">
+            <x-sidebar />
+            <div class="min-h-screen pl-20 w-full transition-all duration-300 pt-12">
+                <main class="p-6">
+                    {{ $slot }}
+                </main>
+            </div>
+        </div>
+    @else
+        {{ $slot }}
     @endauth
 
-    <main>
-        {{ $slot }}
-    </main>
-
     @livewireScripts
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.addEventListener('livewire:initialized', () => {
